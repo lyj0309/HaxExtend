@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 import os
 import sys
@@ -140,11 +141,14 @@ def barkPush(body):
 
 try:
     # create chrome driver
-    option = webdriver.ChromeOptions()
-    option.add_argument('--disable-notifications')
-    # option.add_argument('--mute-audio')
-    option.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chromedriver = "/usr/bin/chromedriver"
+    os.environ["webdriver.chrome.driver"] = chromedriver
+    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chromedriver)
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
