@@ -15,7 +15,7 @@ jobs:
             python-version: '3.9'
         - name: 'Install requirements'
           run: |
-            pip install -r ./requirements.txt
+            pip3 install -r ./requirements.txt
         - name: Install ChromeDriver
           run: |
             CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
