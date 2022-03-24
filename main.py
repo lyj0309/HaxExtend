@@ -21,9 +21,10 @@ audioFile = "\\payload.mp3"
 urlLogin = 'https://hax.co.id/login'
 urlRenew = 'https://hax.co.id/vps-renew/'
 SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
-USERNAME = ''
-PASSWORD = ''
-BARKKEY = ''
+# secret
+USERNAME = os.environ['USERNAME']
+PASSWORD = os.environ['PASSWORD']
+BARKKEY = os.environ['BARKKEY']
 
 
 def delay():
