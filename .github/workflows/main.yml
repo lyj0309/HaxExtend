@@ -5,30 +5,30 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
         - name: 'Checkout codes'
           uses: actions/checkout@v2
         - name: 'Set up Python'
           uses: actions/setup-python@v2
           with:
-            python-version: '3.9'
+            python-version: '3.9.10'
         - name: 'Install requirements'
           run: |
-            which python
+            which python3
             which chromedriver
-            pip install -r ./requirements.txt
+            pip3 install -r ./requirements.txt
 #           sudo chmod +x /usr/local/share/chrome_driver
 
-        - name: Install ChromeDriver
-          run: |
-            sudo cp -p ./chromedriver /usr/bin/
-            chmod -R 777 /usr/bin/chromedriver
+#         - name: Install ChromeDriver
+#           run: |
+#             sudo cp -p ./chromedriver /usr/bin/
+#             chmod -R 777 /usr/bin/chromedriver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
             BARKKEY: ${{ secrets.BARKKEY }}
           run: |
-            python ./main.py
+            python3 ./main.py
         
