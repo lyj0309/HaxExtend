@@ -9,27 +9,26 @@ jobs:
     steps:
         - name: 'Checkout codes'
           uses: actions/checkout@v2
-        - name: 'Set up Python'
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.9'
+#         - name: 'Set up Python'
+#           uses: actions/setup-python@v2
+#           with:
+#             python-version: '3.9'
         - name: 'Install requirements'
           run: |
             which python
             which chromedriver
             pip install -r ./requirements.txt
 #           pip install --user six
-        - name: Install ChromeDriver
-          run: |
-            sudo cp -p ./chromedriver /usr/bin/
-            chmod -R 777 /usr/bin/chromedriver
-            chmod -R 777 /usr/local/share/chrome_driver
-          # chromedriver
+#         - name: Install ChromeDriver
+#           run: |
+#             sudo cp -p ./chromedriver /usr/bin/
+#             chmod -R 777 /usr/bin/chromedriver
+#             chmod -R 777 /usr/local/share/chrome_driver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
             BARKKEY: ${{ secrets.BARKKEY }}
           run: |
-            python ./main.py
+            python3 ./main.py
         
