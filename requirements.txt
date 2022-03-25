@@ -1,4 +1,3 @@
 requests
 urllib3
 selenium
-webdriver-manager
