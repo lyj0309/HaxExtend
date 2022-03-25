@@ -10,6 +10,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 import os
 import sys
@@ -148,7 +150,8 @@ try:
 #     Options.add_argument('--disable-dev-shm-usage')
 #     chromedriver = '/usr/local/share/chrome_driver'
 #     os.environ["webdriver.chrome.driver"] = chromedriver
-    driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver')
+#   driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
