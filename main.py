@@ -11,8 +11,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver import FirefoxOptions
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver import FirefoxOptions
 
 
 import os
@@ -142,36 +142,33 @@ def barkPush(body):
     requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
     print('bark push Done!')
 
-# try:
+try:
     # create chrome driver
-#     Options = webdriver.ChromeOptions()
-#     Options.add_argument('--headless')
-#     Options.add_argument('--no-sandbox')
-#     Options.add_argument('--disable-gpu')
-#     Options.add_argument('--disable-dev-shm-usage')
-#     chromedriver = '/usr/local/share/chrome_driver'
-#     os.environ["webdriver.chrome.driver"] = chromedriver
-#     driver = webdriver.Chrome()
-# #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-#     delay()
-#     # go to website which have recaptcha protection
-#     driver.get(urlLogin)
-# except Exception as e:
-#     sys.exit(
-#         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
+    Options = webdriver.ChromeOptions()
+    Options.add_argument('--headless')
+    Options.add_argument('--no-sandbox')
+    Options.add_argument('--disable-gpu')
+    Options.add_argument('--disable-dev-shm-usage')
+    # chromedriver = '/usr/local/share/chrome_driver'
+    # os.environ["webdriver.chrome.driver"] = chromedriver
+    driver = webdriver.Chrome(options=Options)
+#   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    delay()
+    # go to website which have recaptcha protection
+    driver.get(urlLogin)
+except Exception as e:
+    sys.exit(
+        "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 #options = Options()
 #options.add_argument("--no-sandbox") #bypass OS security model
-driver = webdriver.Chrome()
+#driver = webdriver.Chrome()
 
 #driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
 # driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
 # opts = FirefoxOptions()
 # opts.add_argument("--headless")
 # driver = webdriver.Firefox(options=opts)
-
-delay()
-driver.get(urlLogin)
 
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
 driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
