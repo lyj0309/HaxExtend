@@ -21,13 +21,7 @@ jobs:
         - name: 'Install requirements'
           run: |
             pip3 install -r ./requirements.txt
-#           which python3
-#           which chromedriver
 
-#         - name: Install ChromeDriver
-#           run: |
-#             sudo cp -p ./chromedriver /usr/bin/
-#             chmod -R 777 /usr/bin/chromedriver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
