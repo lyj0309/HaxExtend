@@ -159,7 +159,7 @@ def barkPush(body):
 #     sys.exit(
 #         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver")
 delay()
 driver.get(urlLogin)
 
