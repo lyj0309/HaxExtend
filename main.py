@@ -141,7 +141,7 @@ def barkPush(body):
     requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
     print('bark push Done!')
 
-try:
+# try:
     # create chrome driver
 #     Options = webdriver.ChromeOptions()
 #     Options.add_argument('--headless')
@@ -150,15 +150,18 @@ try:
 #     Options.add_argument('--disable-dev-shm-usage')
 #     chromedriver = '/usr/local/share/chrome_driver'
 #     os.environ["webdriver.chrome.driver"] = chromedriver
-    driver = webdriver.Chrome()
-#   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    delay()
-    # go to website which have recaptcha protection
-    driver.get(urlLogin)
-except Exception as e:
-    sys.exit(
-        "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
+#     driver = webdriver.Chrome()
+# #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+#     delay()
+#     # go to website which have recaptcha protection
+#     driver.get(urlLogin)
+# except Exception as e:
+#     sys.exit(
+#         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
+driver = webdriver.Chrome()
+delay()
+driver.get(urlLogin)
 
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
 driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
