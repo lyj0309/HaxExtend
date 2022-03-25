@@ -166,7 +166,7 @@ options.add_argument("--disable-dev-shm-usage") #overcome limited resource probl
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
-driver = webdriver.Chrome(options=options, executable_path=r'/usr/bin/chromedriver')
+driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
 delay()
 driver.get(urlLogin)
 
