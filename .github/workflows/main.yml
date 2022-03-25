@@ -2,6 +2,11 @@ name: 'HaxExtend'
 
 on:
   push:
+  schedule:
+    # run every 3 days on UTC 0/1/2am (8/9/10am CN time)
+     - cron: '0 0,1,2 */3 * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,10 +20,9 @@ jobs:
 #             python-version: '3.9.10'
         - name: 'Install requirements'
           run: |
-            which python3
-            which chromedriver
             pip3 install -r ./requirements.txt
-#           sudo chmod +x /usr/local/share/chrome_driver
+#           which python3
+#           which chromedriver
 
 #         - name: Install ChromeDriver
 #           run: |
