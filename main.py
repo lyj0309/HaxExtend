@@ -12,6 +12,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver import FirefoxOptions
+
 
 import os
 import sys
@@ -164,7 +166,9 @@ def barkPush(body):
 
 #driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
 # driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
-driver = webdriver.Firefox()
+opts = FirefoxOptions()
+opts.add_argument("--headless")
+browser = webdriver.Firefox(firefox_options=opts)
 
 delay()
 driver.get(urlLogin)
