@@ -150,8 +150,8 @@ try:
 #     Options.add_argument('--disable-dev-shm-usage')
 #     chromedriver = '/usr/local/share/chrome_driver'
 #     os.environ["webdriver.chrome.driver"] = chromedriver
-#   driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome()
+#   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
