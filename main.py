@@ -168,7 +168,7 @@ def barkPush(body):
 # driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
 opts = FirefoxOptions()
 opts.add_argument("--headless")
-browser = webdriver.Firefox(options=opts)
+driver = webdriver.Firefox(options=opts)
 
 delay()
 driver.get(urlLogin)
