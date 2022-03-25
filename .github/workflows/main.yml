@@ -9,10 +9,10 @@ jobs:
     steps:
         - name: 'Checkout codes'
           uses: actions/checkout@v2
-        - name: 'Set up Python'
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.7'
+#         - name: 'Set up Python'
+#           uses: actions/setup-python@v2
+#           with:
+#             python-version: '3.7'
         - name: 'Install requirements'
           run: |
             which python
@@ -20,8 +20,8 @@ jobs:
             pip install --user six
         - name: Install ChromeDriver
           run: |
-            sudo cp -p ./chromedriver /opt/hostedtoolcache/Python/3.7.12/x64/bin/
-            chmod -R 777 /opt/hostedtoolcache/Python/3.7.12/x64/bin/chromedriver
+            sudo cp -p ./chromedriver /usr/bin/
+            chmod -R 777 /usr/bin/chromedriver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
