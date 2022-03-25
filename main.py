@@ -160,14 +160,15 @@ def barkPush(body):
 #     sys.exit(
 #         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
-# options = Options()
-# options.add_argument("--no-sandbox") #bypass OS security model
+#options = Options()
+options.add_argument("--no-sandbox") #bypass OS security model
+driver = webdriver.Chrome()
 
 #driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
 # driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
-opts = FirefoxOptions()
-opts.add_argument("--headless")
-driver = webdriver.Firefox(options=opts)
+# opts = FirefoxOptions()
+# opts.add_argument("--headless")
+# driver = webdriver.Firefox(options=opts)
 
 delay()
 driver.get(urlLogin)
