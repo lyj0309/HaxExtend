@@ -155,33 +155,45 @@ except Exception as e:
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 # main
+print('fill username')
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
+print('fill password')
 driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
 delay()
 # reCAPTCHA
+print('do reCAPTCHA')
 reCAPTCHA()
 time.sleep(6)
 # login
 driver.switch_to.default_content()
+print('click login')
 driver.find_element(By.NAME, 'login').click()
 # Extend VPS link
+print('click Extend VPS')
 WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Extend VPS Expiration'))).click()
 time.sleep(6)
 # input web address
+print('fill web address')
 driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
 # captcha
+print('do CAPTCHA')
 driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
 # agreement check
+print('click agreement')
 driver.find_element(By.NAME, 'agreement').click()
 # reCAPTCHA again
+print('do reCAPTCHA')
 reCAPTCHA()
 time.sleep(6)
 driver.switch_to.default_content()
 # submit_button (Renew VPS)
+print('click Renew VPS')
 driver.find_element(By.NAME, 'submit_button').click()
 time.sleep(12)
+print('copy text')
 body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
 # print('textBody:', body)
+print('bark push')
 barkPush(body)
 delay()
 driver.quit()
