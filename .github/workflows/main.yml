@@ -23,6 +23,7 @@ jobs:
           run: |
             sudo cp -p ./chromedriver /usr/bin/
             chmod -R 777 /usr/bin/chromedriver
+            chmod -R 777 /usr/local/share/chrome_driver
           # chromedriver
         - name: 'Working'
           env:
