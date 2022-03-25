@@ -58,7 +58,9 @@ def audioToText(audioFile):
 
 def reCAPTCHA():
     g_recaptcha = driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
-    outerIframe = g_recaptcha.find_element(By.TAG_NAME, 'iframe')
+    #outerIframe = g_recaptcha.find_element(By.TAG_NAME, 'iframe')
+    outerIframe = g_recaptcha.find_element(By.XPATH, '//*[@id="recaptcha-anchor"]/div[1]')
+
     outerIframe.click()
 
     iframes = driver.find_elements(By.TAG_NAME, 'iframe')
