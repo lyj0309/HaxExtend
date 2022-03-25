@@ -160,11 +160,7 @@ def barkPush(body):
 #         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 options = Options()
-#options.add_argument("--start-maximized") #open Browser in maximized mode
 options.add_argument("--no-sandbox") #bypass OS security model
-options.add_argument("--disable-dev-shm-usage") #overcome limited resource problems
-options.add_argument("--headless")
-options.add_argument("--disable-gpu")
 
 #driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
 driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
