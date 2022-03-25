@@ -4,3 +4,9 @@
 - USERNAME
 - PASSWORD
 - BARKKEY
+
+#### 参考
+- https://www.python.org/
+- https://www.selenium.dev/
+- https://www.youtube.com/watch?v=As-_hfZUyIs
+- https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
