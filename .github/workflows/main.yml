@@ -22,7 +22,7 @@ jobs:
           run: |
             sudo cp -p ./chromedriver /usr/bin/
             chmod -R 777 /usr/bin/chromedriver
-            chromedriver
+          # chromedriver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
