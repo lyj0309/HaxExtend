@@ -137,7 +137,7 @@ def barkPush(body):
     barkUrl = 'https://api.day.app/' + BARKKEY
     title = 'HaxExtend'
     requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
-    print('bark push Done!')
+    print('bark push Done! Body:', body)
 
 try:
     # create chrome driver
@@ -181,7 +181,7 @@ driver.switch_to.default_content()
 driver.find_element(By.NAME, 'submit_button').click()
 time.sleep(12)
 body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
-print('textBody:', body)
+# print('textBody:', body)
 barkPush(body)
 delay()
 driver.quit()
