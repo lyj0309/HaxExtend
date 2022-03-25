@@ -141,14 +141,14 @@ def barkPush(body):
 
 try:
     # create chrome driver
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    Options = webdriver.ChromeOptions()
+    Options.add_argument('--headless')
+    Options.add_argument('--no-sandbox')
+    Options.add_argument('--disable-gpu')
+    Options.add_argument('--disable-dev-shm-usage')
     chromedriver = "/usr/bin/chromedriver"
     os.environ["webdriver.chrome.driver"] = chromedriver
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=chromedriver)
+    driver = webdriver.Chrome(chrome_options=Options, executable_path=chromedriver)
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
