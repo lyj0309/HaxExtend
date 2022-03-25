@@ -18,10 +18,10 @@ jobs:
             which python
             pip install -r ./requirements.txt
             pip install --user six
-#        - name: Install ChromeDriver
-#          run: |
-#            sudo cp -p ./chromedriver /usr/bin/
-#            chmod -R 777 /usr/bin/chromedriver
+        - name: Install ChromeDriver
+          run: |
+            sudo cp -p ./chromedriver /opt/hostedtoolcache/Python/3.7.12/x64/bin/
+            chmod -R 777 /opt/hostedtoolcache/Python/3.7.12/x64/bin/chromedriver
         - name: 'Working'
           env:
             USERNAME: ${{ secrets.USERNAME }}
