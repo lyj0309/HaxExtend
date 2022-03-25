@@ -2,8 +2,13 @@
     BYPASS reCaptcha By YouTube Channel: NIKO TECH
     Captcha + Others By github@Mybdye 2022.03.24
 """
+import os
+import sys
+import time
 import random
 import urllib
+import requests
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -11,21 +16,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
-# from selenium.webdriver import FirefoxOptions
-
-
-import os
-import sys
-import time
-import requests
 
 audioToTextDelay = 10
 delayTime = 2
 audioFile = "\\payload.mp3"
 urlLogin = 'https://hax.co.id/login'
-urlRenew = 'https://hax.co.id/vps-renew/'
 SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
+
 # secret
 USERNAME = os.environ['USERNAME']
 PASSWORD = os.environ['PASSWORD']
@@ -149,10 +146,7 @@ try:
     Options.add_argument('--no-sandbox')
     Options.add_argument('--disable-gpu')
     Options.add_argument('--disable-dev-shm-usage')
-    # chromedriver = '/usr/local/share/chrome_driver'
-    # os.environ["webdriver.chrome.driver"] = chromedriver
     driver = webdriver.Chrome(options=Options)
-#   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
@@ -160,16 +154,7 @@ except Exception as e:
     sys.exit(
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
-#options = Options()
-#options.add_argument("--no-sandbox") #bypass OS security model
-#driver = webdriver.Chrome()
-
-#driver = webdriver.Chrome(options=options, executable_path='/usr/local/share/chrome_driver')
-# driver = webdriver.Chrome(options=options, executable_path='/usr/bin/chromedriver')
-# opts = FirefoxOptions()
-# opts.add_argument("--headless")
-# driver = webdriver.Firefox(options=opts)
-
+# main
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
 driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
 delay()
