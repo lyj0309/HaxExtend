@@ -31,7 +31,6 @@ USERNAME = os.environ['USERNAME']
 PASSWORD = os.environ['PASSWORD']
 BARKKEY = os.environ['BARKKEY']
 
-
 def delay():
     time.sleep(random.randint(2, 3))
 
