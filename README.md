@@ -1,4 +1,7 @@
 ## HaxExtend with Github Action
+#### 计划
+- Helium 版本研究中
+
 #### Secret 增加以下变量
 - ```USERNAME```
 - ```PASSWORD```
