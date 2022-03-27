@@ -155,6 +155,7 @@ except Exception as e:
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 # main
+time.sleep(10)
 print('fill username')
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
 print('fill password')
@@ -163,15 +164,16 @@ delay()
 # reCAPTCHA
 print('do reCAPTCHA')
 reCAPTCHA()
-time.sleep(6)
+time.sleep(10)
 # login
 driver.switch_to.default_content()
 print('click login')
 driver.find_element(By.NAME, 'login').click()
+time.sleep(10)
 # Extend VPS link
 print('click Extend VPS')
 WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Extend VPS Expiration'))).click()
-time.sleep(6)
+time.sleep(10)
 # input web address
 print('fill web address')
 driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
@@ -184,15 +186,16 @@ driver.find_element(By.NAME, 'agreement').click()
 # reCAPTCHA again
 print('do reCAPTCHA')
 reCAPTCHA()
-time.sleep(6)
+time.sleep(10)
 driver.switch_to.default_content()
 # submit_button (Renew VPS)
 print('click Renew VPS')
 driver.find_element(By.NAME, 'submit_button').click()
-time.sleep(12)
+time.sleep(15)
 print('copy text')
 body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
 # print('textBody:', body)
+delay()
 print('bark push')
 barkPush(body)
 delay()
