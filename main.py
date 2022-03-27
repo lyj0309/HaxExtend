@@ -26,7 +26,12 @@ SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
 # secret
 USERNAME = os.environ['USERNAME']
 PASSWORD = os.environ['PASSWORD']
-BARKKEY = os.environ['BARKKEY']
+try:
+    BARKKEY = os.environ['BARKKEY']
+    barkKey = 1
+except:
+    print('No BarkKey')
+    barkKey = 0
 
 def delay():
     time.sleep(random.randint(2, 3))
@@ -133,11 +138,14 @@ def CAPTCHA():
     return captcha_result
 
 def barkPush(body):
-    # bark push
-    barkUrl = 'https://api.day.app/' + BARKKEY
-    title = 'HaxExtend'
-    requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
-    print('bark push Done! Body:', body)
+    if barkKey == 1:
+        # bark push
+        barkUrl = 'https://api.day.app/' + BARKKEY
+        title = 'HaxExtend'
+        requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
+        print('bark push Done! Body:', body)
+    elseif barkKey == 0:
+        print('No barkKey, Body is:', body)
 
 try:
     # create chrome driver
