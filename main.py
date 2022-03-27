@@ -144,7 +144,7 @@ def barkPush(body):
         title = 'HaxExtend'
         requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
         print('bark push Done! Body:', body)
-    elseif barkKey == 0:
+    elif barkKey == 0:
         print('No barkKey, Body is:', body)
 
 try:
