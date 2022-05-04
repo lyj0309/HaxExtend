@@ -186,8 +186,8 @@ time.sleep(10)
 print('fill web address')
 driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
 # captcha
-print('do CAPTCHA')
-driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
+# print('do CAPTCHA')
+# driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
 # agreement check
 print('click agreement')
 driver.find_element(By.NAME, 'agreement').click()
