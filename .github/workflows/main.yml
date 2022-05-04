@@ -7,6 +7,7 @@ on:
      - cron: '0 0,1,2 */3 * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
 
 jobs:
   build:
@@ -27,6 +28,7 @@ jobs:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
             BARKKEY: ${{ secrets.BARKKEY }}
+            TWOCAPTCHA_TOKEN: ${{ secrets.TWOCAPTCHA_TOKEN }}
           run: |
             python3 ./main.py
         

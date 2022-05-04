@@ -16,16 +16,23 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from twocaptcha import TwoCaptcha
 
 audioToTextDelay = 10
 delayTime = 2
 audioFile = "\\payload.mp3"
-urlLogin = 'https://hax.co.id/login'
+origin_host = 'hax.co.id'
+# urlLogin = 'https://hax.co.id/login'
+urlLogin = 'https://'+origin_host+'/login'
 SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
 
 # secret
 USERNAME = os.environ['USERNAME']
+
 PASSWORD = os.environ['PASSWORD']
+TWOCAPTCHA_TOKEN = os.environ['TWOCAPTCHA_TOKEN']
+solver = TwoCaptcha(TWOCAPTCHA_TOKEN)
+
 try:
     BARKKEY = os.environ['BARKKEY']
     barkKey = 1
@@ -33,8 +40,10 @@ except:
     print('No BarkKey')
     barkKey = 0
 
+
 def delay():
     time.sleep(random.randint(2, 3))
+
 
 def audioToText(audioFile):
     driver.execute_script('''window.open("","_blank")''')
@@ -58,74 +67,28 @@ def audioToText(audioFile):
 
     return result
 
+
 def reCAPTCHA():
+
+    # google大概率不会让你用音频，只能用图片
     g_recaptcha = driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
-    outerIframe = g_recaptcha.find_element(By.TAG_NAME, 'iframe')
-    outerIframe.click()
-
-    iframes = driver.find_elements(By.TAG_NAME, 'iframe')
-    audioBtnFound = False
-    audioBtnIndex = -1
-
-    for index in range(len(iframes)):
-        driver.switch_to.default_content()
-        iframe = driver.find_elements(By.TAG_NAME, 'iframe')[index]
-        driver.switch_to.frame(iframe)
-        driver.implicitly_wait(delayTime)
-        try:
-            audioBtn = driver.find_element(By.ID, "recaptcha-audio-button")
-            audioBtn.click()
-            audioBtnFound = True
-            audioBtnIndex = index
-            break
-        except Exception as e:
-            pass
-
-    if audioBtnFound:
-        try:
-            while True:
-                # get the mp3 audio file
-                src = driver.find_element(By.ID, "audio-source").get_attribute("src")
-                print("[INFO] Audio src: %s" % src)
-
-                # download the mp3 audio file from the source
-                urllib.request.urlretrieve(src, os.getcwd() + audioFile)
-
-                # Speech To Text Conversion
-                key = audioToText(os.getcwd() + audioFile)
-                print("[INFO] Recaptcha Key: %s" % key)
-
-                driver.switch_to.default_content()
-                iframe = driver.find_elements(By.TAG_NAME, 'iframe')[audioBtnIndex]
-                driver.switch_to.frame(iframe)
-
-                # key in results and submit
-                inputField = driver.find_element(By.ID, "audio-response")
-                inputField.send_keys(key)
-                delay()
-                inputField.send_keys(Keys.ENTER)
-                delay()
-                delay()
-
-                err = driver.find_elements(By.CLASS_NAME, 'rc-audiochallenge-error-message')[0]
-                if err.text == "" or err.value_of_css_property('display') == 'none':
-                    print("[INFO] Success!")
-                    break
-
-        except Exception as e:
-            print(e)
-            barkPush('[INFO] Possibly blocked by google. Change IP,Use Proxy method for requests')
-            sys.exit("[INFO] Possibly blocked by google. Change IP,Use Proxy method for requests")
-    else:
-        # sys.exit("[INFO] Audio Play Button not found! In Very rare cases!")
-        print('reCAPTCHA not found!')
+    sitekey = g_recaptcha.get_attribute("data-sitekey")
+    result = solver.recaptcha(sitekey=sitekey, url=urlLogin)
+    print("recaptcha_res", result)
+    driver.execute_script(
+        """document.querySelector('[name="g-recaptcha-response"]').innerText='{}'""".format(result['code']))
     print('reCAPTCHA done')
+
 
 def CAPTCHA():
     # 获取 captcha 图片链接
-    number1 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[1]').get_attribute('src').split('-')[1][0])
+    number1 = int(
+        driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[1]').get_attribute('src').split('-')[1][
+            0])
     caculateMethod = driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]').text[0]
-    number2 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[2]').get_attribute('src').split('-')[1][0])
+    number2 = int(
+        driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[2]').get_attribute('src').split('-')[1][
+            0])
     print('Method', caculateMethod)
     if caculateMethod == '+':
         captcha_result = number1 + number2
@@ -137,6 +100,7 @@ def CAPTCHA():
         captcha_result = number1 / number2
     return captcha_result
 
+
 def barkPush(body):
     if barkKey == 1:
         # bark push
@@ -147,10 +111,12 @@ def barkPush(body):
     elif barkKey == 0:
         print('No barkKey, Body is:', body)
 
+
 try:
     # create chrome driver
     Options = webdriver.ChromeOptions()
     Options.add_argument('--headless')
+    Options.add_extension('./adguard.crx')
     Options.add_argument('--no-sandbox')
     Options.add_argument('--disable-gpu')
     Options.add_argument('--disable-dev-shm-usage')
@@ -159,6 +125,7 @@ try:
     # go to website which have recaptcha protection
     driver.get(urlLogin)
 except Exception as e:
+    print(e)
     sys.exit(
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
@@ -184,10 +151,10 @@ WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, 
 time.sleep(10)
 # input web address
 print('fill web address')
-driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
+driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys(origin_host)
 # captcha
 print('do CAPTCHA')
-driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
+driver.find_element(By.XPATH, '//*[@id="captcha"]').send_keys(CAPTCHA())
 # agreement check
 print('click agreement')
 driver.find_element(By.NAME, 'agreement').click()
@@ -209,8 +176,10 @@ barkPush(body)
 delay()
 driver.quit()
 
+
 def run():
     print("")
+
 
 if __name__ == '__main__':
     run()
