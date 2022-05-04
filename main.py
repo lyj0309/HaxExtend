@@ -186,16 +186,16 @@ time.sleep(10)
 print('fill web address')
 driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
 # captcha
-# print('do CAPTCHA')
-# driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
+print('do CAPTCHA')
+driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
 # agreement check
 print('click agreement')
 driver.find_element(By.NAME, 'agreement').click()
 # reCAPTCHA again
-print('do reCAPTCHA')
-reCAPTCHA()
-time.sleep(10)
-driver.switch_to.default_content()
+# print('do reCAPTCHA')
+# reCAPTCHA()
+# time.sleep(10)
+# driver.switch_to.default_content()
 # submit_button (Renew VPS)
 print('click Renew VPS')
 driver.find_element(By.NAME, 'submit_button').click()
@@ -208,3 +208,9 @@ print('bark push')
 barkPush(body)
 delay()
 driver.quit()
+
+def run():
+    print("")
+
+if __name__ == '__main__':
+    run()
