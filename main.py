@@ -22,7 +22,6 @@ audioToTextDelay = 10
 delayTime = 2
 audioFile = "\\payload.mp3"
 origin_host = 'hax.co.id'
-# urlLogin = 'https://hax.co.id/login'
 urlLogin = 'https://'+origin_host+'/login'
 SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
 
@@ -69,7 +68,6 @@ def audioToText(audioFile):
 
 
 def reCAPTCHA():
-
     # google大概率不会让你用音频，只能用图片
     g_recaptcha = driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
     sitekey = g_recaptcha.get_attribute("data-sitekey")
@@ -104,9 +102,10 @@ def CAPTCHA():
 def barkPush(body):
     if barkKey == 1:
         # bark push
-        barkUrl = 'https://api.day.app/' + BARKKEY
-        title = 'HaxExtend'
-        requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
+        # barkUrl = 'https://api.day.app/' + BARKKEY
+        # title = 'HaxExtend'
+        # requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
+        requests.get(url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{body}')
         print('bark push Done! Body:', body)
     elif barkKey == 0:
         print('No barkKey, Body is:', body)
@@ -129,57 +128,57 @@ except Exception as e:
     sys.exit(
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
-# main
-time.sleep(10)
-print('fill username')
-driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
-print('fill password')
-driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
-delay()
-# reCAPTCHA
-print('do reCAPTCHA')
-reCAPTCHA()
-time.sleep(10)
-# login
-driver.switch_to.default_content()
-print('click login')
-driver.find_element(By.NAME, 'login').click()
-time.sleep(10)
-# Extend VPS link
-print('click Extend VPS')
-WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Extend VPS Expiration'))).click()
-time.sleep(10)
-# input web address
-print('fill web address')
-driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys(origin_host)
-# captcha
-print('do CAPTCHA')
-driver.find_element(By.XPATH, '//*[@id="captcha"]').send_keys(CAPTCHA())
-# agreement check
-print('click agreement')
-driver.find_element(By.NAME, 'agreement').click()
-# reCAPTCHA again
-# print('do reCAPTCHA')
-# reCAPTCHA()
-# time.sleep(10)
-# driver.switch_to.default_content()
-# submit_button (Renew VPS)
-print('click Renew VPS')
-driver.find_element(By.NAME, 'submit_button').click()
-time.sleep(15)
-print('copy text')
-body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
-# print('textBody:', body)
-delay()
-print('bark push')
-barkPush(body)
-delay()
-driver.quit()
-
 
 def run():
-    print("")
+    # main
+    time.sleep(10)
+    print('fill username')
+    driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
+    print('fill password')
+    driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
+    delay()
+    # reCAPTCHA
+    print('do reCAPTCHA')
+    reCAPTCHA()
+    time.sleep(10)
+    # login
+    driver.switch_to.default_content()
+    print('click login')
+    driver.find_element(By.NAME, 'login').click()
+    time.sleep(10)
+    # Extend VPS link
+    print('click Extend VPS')
+    WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Extend VPS Expiration'))).click()
+    time.sleep(10)
+    # input web address
+    print('fill web address')
+    driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys(origin_host)
+    # captcha
+    print('do CAPTCHA')
+    driver.find_element(By.XPATH, '//*[@id="captcha"]').send_keys(CAPTCHA())
+    # agreement check
+    print('click agreement')
+    driver.find_element(By.NAME, 'agreement').click()
+    # reCAPTCHA again
+    # print('do reCAPTCHA')
+    # reCAPTCHA()
+    # time.sleep(10)
+    # driver.switch_to.default_content()
+    # submit_button (Renew VPS)
+    print('click Renew VPS')
+    driver.find_element(By.NAME, 'submit_button').click()
+    time.sleep(15)
+    print('copy text')
+    body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
+    # print('textBody:', body)
+    delay()
+    print('bark push')
+    barkPush(body)
+    delay()
+    driver.quit()
 
 
 if __name__ == '__main__':
+    run()
+    origin_host = 'woiden.id'
     run()
