@@ -28,4 +28,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: swr.ap-southeast-3.myhuaweicloud.com/lyj/haxExtend:latest
+          tags: swr.ap-southeast-3.myhuaweicloud.com/lyj/hax_extend:latest
