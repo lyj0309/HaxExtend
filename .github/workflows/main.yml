@@ -20,7 +20,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: swr.ap-southeast-3.myhuaweicloud.com
-          username: ${{ secrets.HW_AK }}
+          username: ap-southeast-3@${{ secrets.HW_AK }}
           password: ${{ secrets.HW_SEC }}
 
       -
