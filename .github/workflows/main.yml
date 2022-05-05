@@ -1,34 +1,31 @@
-name: 'HaxExtend'
+name: 'pushDocker'
 
 on:
-  #push:
-  schedule:
-    # run every 3 days on UTC 0/1/2am (8/9/10am CN time)
-     - cron: '0 0,1,2 */3 * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
 
 jobs:
-  build:
-    runs-on: macos-latest
+  docker:
+    runs-on: ubuntu-latest
     steps:
-        - name: 'Checkout codes'
-          uses: actions/checkout@v2
-#         - name: 'Set up Python'
-#           uses: actions/setup-python@v2
-#           with:
-#             python-version: '3.9.10'
-        - name: 'Install requirements'
-          run: |
-            pip3 install -r ./requirements.txt
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          registry: swr.ap-southeast-3.myhuaweicloud.com
+          username: ${{ secrets.HW_AK }}
+          password: ${{ secrets.HW_SEC }}
 
-        - name: 'Working'
-          env:
-            USERNAME: ${{ secrets.USERNAME }}
-            PASSWORD: ${{ secrets.PASSWORD }}
-            BARKKEY: ${{ secrets.BARKKEY }}
-            TWOCAPTCHA_TOKEN: ${{ secrets.TWOCAPTCHA_TOKEN }}
-          run: |
-            python3 ./main.py
-        
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: swr.ap-southeast-3.myhuaweicloud.com/lyj/haxExtend:latest
