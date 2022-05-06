@@ -30,7 +30,7 @@ jobs:
       -
         name: "run"
         run: |
-          docker run -it -e USERNAME=${{ secrets.USERNAME }} \
+          docker run -e USERNAME=${{ secrets.USERNAME }} \
           -e PASSWORD=${{ secrets.PASSWORD }} \
           -e TWOCAPTCHA_TOKEN=${{ secrets.TWOCAPTCHA_TOKEN }} \
           lyj/hax_extend:latest
