@@ -13,22 +13,26 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-        - name: 'Checkout codes'
-          uses: actions/checkout@v2
-#         - name: 'Set up Python'
-#           uses: actions/setup-python@v2
-#           with:
-#             python-version: '3.9.10'
-        - name: 'Install requirements'
-          run: |
-            pip3 install -r ./requirements.txt
+      - name: 'Checkout codes'
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          tags: lyj/hax_extend:latest
+      -
+        name: "run"
+        run: |
+          docker run -it -e USERNAME=${{ secrets.USERNAME }} \
+          -e PASSWORD=${{ secrets.PASSWORD }} \
+          -e TWOCAPTCHA_TOKEN=${{ secrets.TWOCAPTCHA_TOKEN }} \
+          lyj/hax_extend:latest
+          
 
-        - name: 'Working'
-          env:
-            USERNAME: ${{ secrets.USERNAME }}
-            PASSWORD: ${{ secrets.PASSWORD }}
-            BARKKEY: ${{ secrets.BARKKEY }}
-            TWOCAPTCHA_TOKEN: ${{ secrets.TWOCAPTCHA_TOKEN }}
-          run: |
-            python3 ./main.py
-        
