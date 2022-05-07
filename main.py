@@ -14,15 +14,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from twocaptcha import TwoCaptcha
 
 audioToTextDelay = 10
 delayTime = 2
 audioFile = "\\payload.mp3"
 origin_host = 'hax.co.id'
-urlLogin = 'https://'+origin_host+'/login'
 SpeechToTextURL = 'https://speech-to-text-demo.ng.bluemix.net/'
 
 # secret
@@ -38,6 +35,8 @@ try:
 except:
     print('No BarkKey')
     barkKey = 0
+
+global driver
 
 
 def delay():
@@ -71,7 +70,7 @@ def reCAPTCHA():
     # google大概率不会让你用音频，只能用图片
     g_recaptcha = driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
     sitekey = g_recaptcha.get_attribute("data-sitekey")
-    result = solver.recaptcha(sitekey=sitekey, url=urlLogin)
+    result = solver.recaptcha(sitekey=sitekey, url='https://' + origin_host + '/login')
     print("recaptcha_res", result)
     driver.execute_script(
         """document.querySelector('[name="g-recaptcha-response"]').innerText='{}'""".format(result['code']))
@@ -105,7 +104,8 @@ def barkPush(body):
         # barkUrl = 'https://api.day.app/' + BARKKEY
         # title = 'HaxExtend'
         # requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
-        requests.get(url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{body}')
+        print(requests.get(
+            url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{body}'))
         print('bark push Done! Body:', body)
     elif barkKey == 0:
         print('No barkKey, Body is:', body)
@@ -122,7 +122,7 @@ try:
     driver = webdriver.Chrome(options=Options)
     delay()
     # go to website which have recaptcha protection
-    driver.get(urlLogin)
+    print(origin_host)
 except Exception as e:
     print(e)
     sys.exit(
@@ -130,10 +130,11 @@ except Exception as e:
 
 
 def run():
+    driver.get('https://' + origin_host + '/login')
     # main
     time.sleep(10)
     print('fill username')
-    driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
+    driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(997077701)
     print('fill password')
     driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
     delay()
