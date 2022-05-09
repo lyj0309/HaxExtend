@@ -1,15 +1,15 @@
 ## HaxExtend with Github Action
-#### 计划
-- Helium 版本研究中
+woiden.id也支持
 
 #### Secret 增加以下变量
 - ```USERNAME```
 - ```PASSWORD```
-- ```BARKKEY```
-#### ```随缘 Extend，Possibly blocked by google```
+- ```TWOCAPTCHA_TOKEN```
 
-<img src=./result.jpeg width=50% />
+可以自己选择添加`TWOCAPTCHA_TOKEN`，在音频验证码不可用时选择这个验证
 ![image.png](https://wx1.sinaimg.cn/large/008rgIcAly1h1wi8lbsasj30f80b7ac6.jpg)
+
+
 #### 参考
 - https://www.python.org/
 - https://www.selenium.dev/
