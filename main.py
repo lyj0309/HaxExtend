@@ -16,12 +16,13 @@ from selenium.webdriver.support import expected_conditions as EC
 import captcha
 import globalVal
 
-origin_host = 'hax.co.id'
-
 # secret
 USERNAME = os.environ['USERNAME']
 PASSWORD = os.environ['PASSWORD']
+origin_host = os.environ['HOST']
 
+
+# origin_host = 'hax.co.id'
 
 def delay():
     time.sleep(random.randint(2, 3))
@@ -32,8 +33,8 @@ def barkPush(body):
     # barkUrl = 'https://api.day.app/' + BARKKEY
     # title = 'HaxExtend'
     # requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
-    print(requests.get(
-        url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{origin_host}：{body}'))
+    requests.get(
+        url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{origin_host}：{body}')
     print('bark push Done! Body:', body)
 
 
@@ -105,8 +106,5 @@ if __name__ == '__main__':
         print(e)
         sys.exit(
             "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
-    origin_host = 'woiden.id'
-    run()
-    origin_host = 'hax.co.id'
     run()
     globalVal.driver.quit()
