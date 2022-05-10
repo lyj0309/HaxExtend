@@ -33,6 +33,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
+          context: .
           load: true
           tags: |
             ghcr.io/lyj0309/hax_extend:latest
