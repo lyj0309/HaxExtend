@@ -24,8 +24,8 @@ ENV PATH="/app:${PATH}"
 
 COPY --from=builder /tmp/chrome.deb .
 COPY --from=builder /tmp/chromedriver .
-RUN    apt install -y /tmp/chrome.deb \
-       && rm /tmp/chrome.deb
+RUN    apt install -y ./chrome.deb \
+       && rm ./chrome.deb
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
