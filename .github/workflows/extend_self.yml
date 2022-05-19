@@ -20,7 +20,7 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - 
+      -
         name: install wgcf
         run: |
           curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
@@ -28,7 +28,7 @@ jobs:
           sudo apt update
           sudo apt install cloudflare-warp -y
           warp-cli  --accept-tos register 
-          warp-cli  --accept-tos connect        
+          warp-cli  --accept-tos connect
       -
         name: Build and push
         uses: docker/build-push-action@v2

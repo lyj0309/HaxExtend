@@ -42,15 +42,13 @@ def audioToText(audioFile):
     return result
 
 
-def twoCaptcha():
+def twoCaptcha(g_recaptcha):
     # google大概率不会让你用音频，只能用图片
-    g_recaptcha = globalVal.driver.find_elements(By.CLASS_NAME, 'g-recaptcha')[0]
     sitekey = g_recaptcha.get_attribute("data-sitekey")
     result = solver.recaptcha(sitekey=sitekey, url='https://' + main.origin_host + '/login')
     print("recaptcha_res", result)
     globalVal.driver.execute_script(
         """document.querySelector('[name="g-recaptcha-response"]').innerText='{}'""".format(result['code']))
-    print('reCAPTCHA done')
 
 
 def reCAPTCHA():
@@ -111,8 +109,7 @@ def reCAPTCHA():
             print(e)
             print("[INFO] Possibly blocked by google. Change IP,Use Proxy method for requests")
             print("获取语言验证码失败，尝试使用图片fuck reCAPTCHA")
-            globalVal.driver.refresh()
-            twoCaptcha()
+            twoCaptcha(g_recaptcha)
             # sys.exit("[INFO] Possibly blocked by google. Change IP,Use Proxy method for requests")
     else:
         # sys.exit("[INFO] Audio Play Button not found! In Very rare cases!")
