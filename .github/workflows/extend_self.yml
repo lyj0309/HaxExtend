@@ -1,7 +1,7 @@
 name: 'HaxExtend'
 
 on:
-  push:
+#  push:
   schedule:
     # run every 3 days on UTC 0/1/2am (8/9/10am CN time)
      - cron: '0 1 */2 * *'
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  extend_in_self:
+  extend_hax_in_self:
     runs-on: self-hosted
     steps:
       - name: "run"
@@ -18,7 +18,5 @@ jobs:
           docker run -e USERNAME=${{ secrets.USERNAME }} \
           -e PASSWORD=${{ secrets.PASSWORD }} \
           -e TWOCAPTCHA_TOKEN=${{ secrets.TWOCAPTCHA_TOKEN }} \
-          -e HOST=woiden.id \
+          -e HOST=hax.co.id \
           ghcr.io/lyj0309/hax_extend:latest
-          
-
