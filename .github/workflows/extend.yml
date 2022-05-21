@@ -9,18 +9,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  extend_in_gh:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout codes'
-        uses: actions/checkout@v2
       -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - 
         name: install wgcf
         run: |
           curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
@@ -29,15 +21,6 @@ jobs:
           sudo apt install cloudflare-warp -y
           warp-cli  --accept-tos register 
           warp-cli  --accept-tos connect        
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          load: true
-          tags: |
-            ghcr.io/lyj0309/hax_extend:latest
-
       -
         name: "run"
         run: |

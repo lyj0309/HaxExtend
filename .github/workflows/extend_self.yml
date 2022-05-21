@@ -18,7 +18,7 @@ jobs:
           docker run -e USERNAME=${{ secrets.USERNAME }} \
           -e PASSWORD=${{ secrets.PASSWORD }} \
           -e TWOCAPTCHA_TOKEN=${{ secrets.TWOCAPTCHA_TOKEN }} \
-          -e HOST=hax.co.id \
+          -e HOST=woided.id \
           ghcr.io/lyj0309/hax_extend:latest
           
 
