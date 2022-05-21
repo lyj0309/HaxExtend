@@ -33,9 +33,17 @@ def barkPush(body):
     # barkUrl = 'https://api.day.app/' + BARKKEY
     # title = 'HaxExtend'
     # requests.get(url=f'{barkUrl}/{title}/{body}?isArchive=1')
-    requests.get(
-        url=f'https://service-lqj0ehgj-1256627948.bj.apigw.tencentcs.com/release/wecomchan?sendkey=wabehawbyuhiul323&msg_type=text&msg=hax_extend：{origin_host}：{body}')
-    print('bark push Done! Body:', body)
+    try:
+        WXURL = os.environ['WXURL']
+        data = {
+            "msgtype": "text",
+            "text": {
+                "content": f"{origin_host}：{body}"
+            }
+        }
+        requests.post(WXURL,json=data)
+    except:
+        return
 
 
 def run():
@@ -85,7 +93,7 @@ def run():
         EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
     # print('textBody:', body)
     delay()
-    print('bark push')
+    print('bark push',body)
     barkPush(body)
     delay()
 
