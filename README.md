@@ -30,3 +30,4 @@ Hax和woided的免费vps续费
 - https://www.youtube.com/watch?v=As-_hfZUyIs
 - https://github.com/SongLiKod/HaxExtend
 - https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
+- https://github.com/win2happy/win2Lee
